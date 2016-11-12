@@ -26,10 +26,10 @@
 #######################################################################################
 
 # Personal information (Be sure to change this!)
-FIRSTNAME: Byron
-LASTNAME:  Boots
-GTACCOUNT: bboots3
-GTID:      123456789
+FIRSTNAME: Kung-hsiang
+LASTNAME:  Huang
+GTACCOUNT: khuang87
+GTID:      903266314
 
 # List all sources of help that you consulted while completing this assignment 
 # (other students, colleagues, textbooks, websites, etc.).  This includes anyone you 
@@ -70,31 +70,31 @@ TEXT20NEWS_ACCURACY_TRAIN_NB: 123.45
 TEXT20NEWS_ACCURACY_TRAIN_SVM: 123.45
 
 # What was the testing accuracy?
-TEXT20NEWS_ACCURACY_TEST_NB: 123.45
-TEXT20NEWS_ACCURACY_TEST_SVM: 123.45
+TEXT20NEWS_ACCURACY_TEST_NB: 0.786245
+TEXT20NEWS_ACCURACY_TEST_SVM: 0.839883
 
 # What was the training precision?
 TEXT20NEWS_PRECISION_TRAIN_NB: 123.45
 TEXT20NEWS_PRECISION_TRAIN_SVM: 123.45
 
 # What was the testing precision?
-TEXT20NEWS_PRECISION_TEST_NB: 123.45
-TEXT20NEWS_PRECISION_TEST_SVM: 123.45
+TEXT20NEWS_PRECISION_TEST_NB: 0.831197
+TEXT20NEWS_PRECISION_TEST_SVM: 0.844691
 
 # What was the training recall?
 TEXT20NEWS_RECALL_TRAIN_NB: 123.45
 TEXT20NEWS_RECALL_TRAIN_SVM: 123.45
 
 # What was the testing recall?
-TEXT20NEWS_RECALL_TEST_NB: 123.45
-TEXT20NEWS_RECALL_TEST_SVM: 123.45
+TEXT20NEWS_RECALL_TEST_NB: 0.786245
+TEXT20NEWS_RECALL_TEST_SVM: 0.839883
 
 # What was the training time (in seconds)?
-TEXT20NEWS_TIME_TRAIN_NB: 123.45
-TEXT20NEWS_TIME_TRAIN_SVM: 123.45
+TEXT20NEWS_TIME_TRAIN_NB: 4.33916
+TEXT20NEWS_TIME_TRAIN_SVM: 4.876085
 
 # Which classifier performed better overall?  (answer either NAIVEBAYES or SVM -- you can choose only one)
-TEXT20NEWS_BESTCLASSIFIER: UNKNOWN
+TEXT20NEWS_BESTCLASSIFIER: SVM
 
 
 
