@@ -11,12 +11,15 @@ class NeuralNet:
         '''
         Constructor
         Arguments:
-        	layers - a numpy array of L-2 integers (L is # layers in the network)
+        	layers - a numpy array of L-2 integers (L is # layers in the network) 
         	epsilon - one half the interval around zero for setting the initial weights
         	learningRate - the learning rate for backpropagation
         	numEpochs - the number of epochs to run during training
         '''
-      
+      self.layers = layers
+      self.epsilon = epsilon
+      self.learningRate = learningRate
+      self.numEpochs = numEpochs
 
     def fit(self, X, y):
         '''
@@ -25,7 +28,9 @@ class NeuralNet:
             X is a n-by-d numpy array
             y is an n-dimensional numpy array
         '''
-
+        n,d = X.shape
+        self.classes = set(y)
+        self.thetas = 
 
     def predict(self, X):
         '''

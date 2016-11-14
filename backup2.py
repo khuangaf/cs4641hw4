@@ -34,7 +34,11 @@ class Tfidf():
 			col = sparseColumns[i]
 			tf[row][col] = np.log(X[row,col]) +1
 
-		
+		# for i in range(d):
+		# 	for j in range(t):
+		# 		if X[i,j] > 0:
+		# 			tf[i][j] = np.log(X[i,j]) + 1
+		print t,d
 
 		self.idf = np.zeros(t)
 		totalSetOfDocuments = d
@@ -98,8 +102,8 @@ if __name__ == '__main__':
 	
 	count_vect = CountVectorizer()
 	X_train_counts = count_vect.fit_transform(twenty_train.data)
-	# tfidf_transformer = TfidfTransformer(norm=u'l2',sublinear_tf= True)
-	tfidf_transformer = Tfidf()
+	tfidf_transformer = TfidfTransformer(norm=u'l2',sublinear_tf= True)
+	# tfidf_transformer = Tfidf()
 	X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 	start = time.time()
 	clf = MultinomialNB().fit(X_train_tfidf, twenty_train.target)	
@@ -177,16 +181,52 @@ if __name__ == '__main__':
 		svm part
 	'''
 
-	start = time.time()
+	# count_vect = CountVectorizer()
+	# X_train_counts = count_vect.fit_transform(twenty_train.data)
+	# tfidf_transformer = TfidfTransformer(norm=u'l2',sublinear_tf= True)
+	# # tfidf_transformer = Tfidf()
+	# X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
+	# start = time.time()
+	# clf = SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, n_iter=5, random_state=42).fit(X_train_tfidf ,twenty_train.target)
+	# # svm_clf = Pipeline([('vect', CountVectorizer()),
+ # #                     ('tfidf', TfidfTransformer(norm=u'l2',sublinear_tf= True)),
+ # #                     ('clf', SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, n_iter=5, random_state=42).fit(X_train_tfidf,twenty_train.target)),
+	# # ])
+
+	
+	# svm_clf = svm_clf.fit(twenty_train.data, twenty_train.target)
+	# end = time.time()
+	# test_trainingTime = end-start
+	
+
+
+	# #testing data
+	# twenty_test = fetch_20newsgroups(subset='test', shuffle=True, random_state=42)
+	# docs_test = twenty_test.data
+	# X_new_counts = count_vect.transform(docs_test)
+	# X_new_tfidf = tfidf_transformer.transform(X_new_counts)
+	# svm_predicted = clf.predict(X_new_tfidf)
+	
+	# # svm_predicted = svm_clf.predict(docs_test)
+
+	# test_recall = metrics.recall_score(twenty_test.target, svm_predicted)
+	# test_precision = metrics.precision_score(twenty_test.target, svm_predicted)
+	# test_accuracy = metrics.accuracy_score(twenty_test.target, svm_predicted)
+
+
+	# svm_clf = Pipeline([('vect', CountVectorizer()),
+ #                     ('tfidf', TfidfTransformer(norm=u'l2',sublinear_tf= True)),
+ #                     ('clf', SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, n_iter=5, random_state=42).fit(X_train_tfidf,twenty_train.target)),
+	# ])
 	clf = SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, n_iter=5, random_state=42).fit(X_train_tfidf,twenty_train.target)
 	
-	
+	start = time.time()
 	# svm_clf = svm_clf.fit(twenty_train.data, twenty_train.target)
 	end = time.time()
 	test_trainingTime = end-start
 	
 	#testing data
-	twenty_test = fetch_20newsgroups(subset='test', shuffle=True, random_state=42, categories= categories)
+	twenty_test = fetch_20newsgroups(subset='test', shuffle=True, random_state=42)
 	docs_test = twenty_test.data
 	X_new_counts = count_vect.transform(docs_test)
 	X_new_tfidf = tfidf_transformer.transform(X_new_counts)
@@ -197,7 +237,7 @@ if __name__ == '__main__':
 	test_recall = metrics.recall_score(twenty_test.target, svm_predicted)
 	test_precision = metrics.precision_score(twenty_test.target, svm_predicted)
 	test_accuracy = metrics.accuracy_score(twenty_test.target, svm_predicted)
-
+	
 	X_train_new_counts = count_vect.transform(twenty_train.data)
 	X_train_new_tfidf = tfidf_transformer.transform(X_train_new_counts)
 	svm_predicted_train = clf.predict(X_train_new_tfidf)
