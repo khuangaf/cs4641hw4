@@ -92,9 +92,8 @@ class Tfidf():
 
 
 if __name__ == '__main__':
-	categories = ['alt.atheism', 'soc.religion.christian',
-              'comp.graphics', 'sci.med']
-	twenty_train = fetch_20newsgroups(subset='train', categories= categories, shuffle=True, random_state=42)
+	
+	twenty_train = fetch_20newsgroups(subset='train', shuffle=True, random_state=42)
 	
 	count_vect = CountVectorizer()
 	X_train_counts = count_vect.fit_transform(twenty_train.data)
@@ -118,7 +117,7 @@ if __name__ == '__main__':
 
 
 	#testing data
-	twenty_test = fetch_20newsgroups(subset='test', categories = categories, shuffle=True, random_state=42)
+	twenty_test = fetch_20newsgroups(subset='test', shuffle=True, random_state=42)
 	docs_test = twenty_test.data
 	X_new_counts = count_vect.transform(docs_test)
 	X_new_tfidf = tfidf_transformer.transform(X_new_counts)
@@ -186,7 +185,7 @@ if __name__ == '__main__':
 	test_trainingTime = end-start
 	
 	#testing data
-	twenty_test = fetch_20newsgroups(subset='test', shuffle=True, random_state=42, categories= categories)
+	twenty_test = fetch_20newsgroups(subset='test', shuffle=True, random_state=42)
 	docs_test = twenty_test.data
 	X_new_counts = count_vect.transform(docs_test)
 	X_new_tfidf = tfidf_transformer.transform(X_new_counts)
