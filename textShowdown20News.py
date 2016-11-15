@@ -11,7 +11,7 @@ import pandas as pd
 import time
 from scipy import sparse
 from numpy import linalg as LA
-
+from sklearn.metrics import precision_recall_fscore_support
 class Tfidf():
 	def __init__(self):
 		self.sublinear_tf= True
@@ -97,8 +97,8 @@ if __name__ == '__main__':
 	
 	count_vect = CountVectorizer()
 	X_train_counts = count_vect.fit_transform(twenty_train.data)
-	# tfidf_transformer = TfidfTransformer(norm=u'l2',sublinear_tf= True)
-	tfidf_transformer = Tfidf()
+	tfidf_transformer = TfidfTransformer(norm=u'l2',sublinear_tf= True)
+	# tfidf_transformer = Tfidf()
 	X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 	start = time.time()
 	clf = MultinomialNB().fit(X_train_tfidf, twenty_train.target)	
@@ -129,18 +129,21 @@ if __name__ == '__main__':
 	# print accuracy
 	
 	# print "nb\n"
+	
+	# test_recall = metrics.recall_score(twenty_test.target, nb_predicted)
+	# test_precision = metrics.precision_score(twenty_test.target, nb_predicted)
 
-	test_recall = metrics.recall_score(twenty_test.target, nb_predicted)
-	test_precision = metrics.precision_score(twenty_test.target, nb_predicted)
 	test_accuracy = metrics.accuracy_score(twenty_test.target, nb_predicted)
+	test_precision, test_recall, fscore, support= precision_recall_fscore_support(twenty_test.target, nb_predicted, average='macro')	
 
 	X_train_new_counts = count_vect.transform(twenty_train.data)
 	X_train_new_tfidf = tfidf_transformer.transform(X_train_new_counts)
 	nb_predicted_train = clf.predict(X_train_new_tfidf)
 
-	train_recall = metrics.recall_score(twenty_train.target, nb_predicted_train)
-	train_precision = metrics.precision_score(twenty_train.target, nb_predicted_train)
+	# train_recall = metrics.recall_score(twenty_train.target, nb_predicted_train)
+	# train_precision = metrics.precision_score(twenty_train.target, nb_predicted_train)
 	train_accuracy = metrics.accuracy_score(twenty_train.target, nb_predicted_train)
+	train_precision, train_recall, fscore, support= precision_recall_fscore_support(twenty_train.target, nb_predicted_train, average='macro')	
 	'''
 		calculation of training part
 	'''
@@ -193,17 +196,19 @@ if __name__ == '__main__':
 	
 	# svm_predicted = svm_clf.predict(docs_test)
 
-	test_recall = metrics.recall_score(twenty_test.target, svm_predicted)
-	test_precision = metrics.precision_score(twenty_test.target, svm_predicted)
+	# test_recall = metrics.recall_score(twenty_test.target, svm_predicted)
+	# test_precision = metrics.precision_score(twenty_test.target, svm_predicted)
 	test_accuracy = metrics.accuracy_score(twenty_test.target, svm_predicted)
+	test_precision, test_recall, fscore, support= precision_recall_fscore_support(twenty_test.target, svm_predicted, average='macro')	
 
 	X_train_new_counts = count_vect.transform(twenty_train.data)
 	X_train_new_tfidf = tfidf_transformer.transform(X_train_new_counts)
 	svm_predicted_train = clf.predict(X_train_new_tfidf)
 
-	train_recall = metrics.recall_score(twenty_train.target, svm_predicted_train)
-	train_precision = metrics.precision_score(twenty_train.target, svm_predicted_train)
+	# train_recall = metrics.recall_score(twenty_train.target, svm_predicted_train)
+	# train_precision = metrics.precision_score(twenty_train.target, svm_predicted_train)
 	train_accuracy = metrics.accuracy_score(twenty_train.target, svm_predicted_train)
+	train_precision, train_recall, fscore, support= precision_recall_fscore_support(twenty_train.target, svm_predicted_train, average='macro')	
 	# print "svm\n"
 	# print(metrics.classification_report(twenty_test.target, svm_predicted, target_names=twenty_test.target_names))
 
