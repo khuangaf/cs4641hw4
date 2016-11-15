@@ -12,6 +12,11 @@ import time
 from scipy import sparse
 from numpy import linalg as LA
 from sklearn.metrics import precision_recall_fscore_support
+from sklearn.svm import SVC
+from sklearn.metrics.pairwise import cosine_similarity
+
+
+
 class Tfidf():
 	def __init__(self):
 		self.sublinear_tf= True
@@ -180,8 +185,8 @@ if __name__ == '__main__':
 	'''
 
 	start = time.time()
-	clf = SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, n_iter=5, random_state=42).fit(X_train_tfidf,twenty_train.target)
-	
+	# clf = SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, n_iter=5, random_state=42).fit(X_train_tfidf,twenty_train.target)
+	clf = SVC(kernel = cosine_similarity).fit(X_train_tfidf,twenty_train.target)
 	
 	# svm_clf = svm_clf.fit(twenty_train.data, twenty_train.target)
 	end = time.time()
